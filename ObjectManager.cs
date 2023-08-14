@@ -17,10 +17,12 @@ namespace LunarLander
 	public interface GameObject
 	{
 		public DrawLayer DrawLayer { get; }
-		public void Update( GameTime gameTime )
+		public Vector2 Position { get; set; }
+		public float Rotation { get; set; }
+		public void Update()
 		{
 		}
-		public void Draw( GameTime gameTime )
+		public void Draw()
 		{
 		}
 	}
@@ -48,7 +50,7 @@ namespace LunarLander
             objectsToAdd.Remove(obj);
             objectsToRemove.Add(obj);
 		}
-		public void Update( GameTime gameTime )
+		public void Update()
 		{
 			foreach (GameObject obj in objectsToAdd)
 			{
@@ -64,17 +66,17 @@ namespace LunarLander
 			{
 				foreach (GameObject obj in drawLayers[i])
 				{
-					obj.Update( gameTime );
+					obj.Update();
 				}
 			}
 		}
-		public void Draw( GameTime gameTime )
+		public void Draw()
 		{
 			for (int i = 0; i < (int)DrawLayer.MaxLayers; ++i)
 			{
 				foreach (GameObject obj in drawLayers[i])
 				{
-					obj.Draw( gameTime );
+					obj.Draw();
 				}
 			}
 		}

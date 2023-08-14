@@ -1,35 +1,29 @@
-﻿using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace LunarLander
 {
-	public class ShipContent
+	public class Ship : PhysicsObject, InputObject
 	{
-		public ShipContent()
+		public Ship() : base()
+		{
+			GraphicMesh = shipModel;
+		}
+		public void KeyPressed(Keys key)
 		{
 		}
-	}
-
-	public class Ship : GameObject, InputObject
-	{
-		public Ship()
-		{
-		}
-
-        public void KeyPressed(Keys key)
-        {
-        }
 		public void KeyReleased(Keys key)
-        {
-
-        }
+		{
+		}
 
 		public Keys[] ListeningKeys { get; } = new Keys[] { Keys.W, Keys.A, Keys.S, Keys.D };
-		public DrawLayer DrawLayer { get; } = DrawLayer.Foreground;
-		static ShipContent Content { get; } = new ShipContent();
+
+		public static Model shipModel;
+		public static void LoadContent()
+		{
+			shipModel = LunarLander.instance.Content.Load<Model>( "models/ship" );
+			Util.SetAllMeshesEffect( shipModel );
+		}
 	}
 }
